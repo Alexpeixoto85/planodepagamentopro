@@ -705,14 +705,6 @@
                  flex-direction: column; /* Empilha os botões */
                  gap: 8px; /* Reduz o espaçamento */
              }
-
-             /* Mobile adjustments for top-links */
-            .top-links {
-                padding: 0 5px; /* Reduz o padding em telas menores */
-            }
-            .top-links .contribution-message {
-                font-size: 0.85rem; /* Fonte um pouco menor em mobile */
-            }
         }
 
         @media (min-width: 768px) {
@@ -788,75 +780,10 @@
 
         .top-links {
             display: flex;
-            flex-direction: column; /* Alinha itens verticalmente */
-            align-items: center;    /* Centraliza horizontalmente */
+            justify-content: flex-end; /* Alterado para flex-end para alinhar qualquer coisa que sobre aqui à direita */
+            align-items: center;
             margin-bottom: 20px;
             padding: 0 10px;
-            text-align: center; /* Centraliza o texto */
-        }
-
-        .top-links .contribution-message {
-            font-size: 0.9rem;
-            color: var(--grey-detail);
-            margin-bottom: 10px; /* Espaço entre a mensagem e o QR Code */
-            max-width: 90%; /* Limita a largura para melhor leitura em telas grandes */
-        }
-
-        /* Novo estilo para o botão do  */
-        .btn- {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px;
-            border-radius: var(--border-radius);
-            font-weight: 500;
-            font-size: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            text-decoration: none;
-            width: auto;
-            flex-shrink: 0;
-            background-color: var(--dark-detail);
-            color: var(--light-text);
-            position: relative;
-            overflow: hidden;
-            flex-direction: column; /* Alinha o texto  e o  verticalmente */
-            gap: 5px; /* Espaçamento entre  e  */
-            line-height: 1.1; /* Reduz espaçamento da linha */
-        }
-
-        .btn-:hover {
-            background-color: #444;
-            transform: translateY(-1px);
-        }
-
-        .btn- .-title {
-            font-size: 1rem; /* Tamanho do "" */
-            font-weight: 700; /* Negrito para "" */
-            color: var(--gold-light); /* Cor para destacar "" */
-        }
-
-        .btn- span.-text {
-            font-size: 0.75rem; /* Tamanho da fonte para o  */
-            font-weight: 600; /* Deixa o  em negrito */
-            color: var(--gold-light); /* Cor para destacar o  */
-            white-space: nowrap; /* Evita que o  quebre linha */
-        }
-
-        /* Mobile adjustments for btn- */
-        @media (max-width: 768px) {
-             .top-button-container .btn- {
-                 padding: 8px; /* Ajusta padding para botões em mobile */
-                 gap: 3px; /* Reduz o espaçamento em mobile */
-             }
-             .btn- .-title {
-                 font-size: 0.9rem; /* "" um pouco menor em mobile */
-             }
-             .btn- span.-text {
-                 font-size: 0.7rem; /*  menor em mobile */
-             }
         }
 
 
@@ -1556,8 +1483,7 @@
 <body>
     <div class="container">
         <div class="top-links">
-            <p class="contribution-message"></p>
-        </div>
+            </div>
 
 
         <div class="card" id="simuladorCard">
@@ -1570,10 +1496,6 @@
                    <i class="fas fa-users"></i>
                    <span id="leadCount">0</span>
                 </button>
-                <a href="https://wa.me/5582996622036?text=Olá! Gostaria de saber mais sobre a contribuição via  para o sistema." target="_blank" class="btn-" title="Contribua via ">
-                    <span class="-title"></span>
-                    <span class="-text"> </span>
-                </a>
                 <button id="btnNovaSimulacao" class="btn btn-primary btn-auto-width" title="Nova Simulação">
                     <i class="fas fa-sync-alt"></i>
                 </button>
@@ -1838,11 +1760,11 @@
                 <div class="editable-header-info">
                     <div class="form-group">
                         <label for="imobiliariaNome">Nome da Imobiliária</label>
-                        <input type="text" id="imobiliariaNome" class="form-control" placeholder="Ex: Cunha Imobiliária">
+                        <input type="text" id="imobiliariaNome" class="form-control" placeholder="Ex: Imobiliária">
                     </div>
                     <div class="form-group">
                         <label for="corretorNome">Nome do Corretor</label>
-                        <input type="text" id="corretorNome" class="form-control" placeholder="Ex: Alex Peixoto">
+                        <input type="text" id="corretorNome" class="form-control" placeholder="Ex: Corretor">
                     </div>
                     <div class="form-group">
                         <label for="corretorCreci">CRECI do Corretor</label>
@@ -1851,8 +1773,8 @@
                 </div>
 
                 <div class="document-header-info" id="pdfHeaderInfo">
-                    <h2 style="color: #333; text-align: center; margin-bottom: 10px; font-size: 1.5rem;">CUNHA IMOBILIÁRIA</h2>
-                    <p style="text-align: center; color: #555; font-size: 0.9rem; margin-bottom: 20px;">ALEX PEIXOTO - CRECI/AL 5794</p>
+                    <h2 style="color: #333; text-align: center; margin-bottom: 10px; font-size: 1.5rem;"></h2>
+                    <p style="text-align: center; color: #555; font-size: 0.9rem; margin-bottom: 20px;"> -</p>
                 </div>
 
                 <div class="document-section">
@@ -2441,11 +2363,9 @@ ${cleanCurrencyFormat(saldoRemanescenteSpan.textContent) > 0.00 ? 'Esse valor ou
                 if (value.length > 5) {
                     if (value.length <= 14 && value.charAt(5) === '9' && value.length > 6) {
                          value = value.replace(/(\(\d{2}\)\s\d{5})(\d{0,4})/, '$1-$2');
-                    }
-                    else if (value.length <=14 && value.charAt(5) !== '9' && value.length > 5){
+                    } else if (value.length <=14 && value.charAt(5) !== '9' && value.length > 5){
                          value = value.replace(/(\(\d{2}\)\s\d{4})(\d{0,4})/, '$1-$2');
-                    }
-                    else if (value.length === 15 && value.charAt(5) === '9') {
+                    } else if (value.length === 15 && value.charAt(5) === '9') {
                         value = value.replace(/(\(\d{2}\)\s\d{5})(\d{4})/, '$1-$2');
                     } else if (value.length === 14 && value.charAt(5) !== '9') {
                         value = value.replace(/(\(\d{2}\)\s\d{4})(\d{4})/, '$1-$2');
@@ -3262,7 +3182,7 @@ ${cleanCurrencyFormat(saldoRemanescenteSpan.textContent) > 0.00 ? 'Esse valor ou
 
         // Função para remover balões e confetes do contêiner
         function clearPartyElements() {
-            // Mantém o #partyMessage, remove apenas os elementos generados dinamicamente
+            // Mantém o #partyMessage, remove apenas os elementos gerados dinamicamente
             const elementsToRemove = partyEffectContainer.querySelectorAll('.balloon, .confetti');
             elementsToRemove.forEach(element => element.remove());
         }
@@ -3557,9 +3477,9 @@ ${cleanCurrencyFormat(saldoRemanescenteSpan.textContent) > 0.00 ? 'Esse valor ou
                 corretorCreciInput.value = savedHeaderInfo.corretorCreci || '';
             } else {
                 // Define valores padrão se não houver nada salvo
-                imobiliariaNomeInput.value = 'CUNHA IMOBILIÁRIA';
-                corretorNomeInput.value = 'Nome do Corretor';
-                corretorCreciInput.value = 'Creci';
+                imobiliariaNomeInput.value = '';
+                corretorNomeInput.value = '';
+                corretorCreciInput.value = 'CRECI/AL 5794';
             }
         }
 
@@ -3750,3 +3670,4 @@ ${cleanCurrencyFormat(saldoRemanescenteSpan.textContent) > 0.00 ? 'Esse valor ou
     </script>
 </body>
 </html>
+
